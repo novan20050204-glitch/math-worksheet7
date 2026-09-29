@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二元一次聯立方程式｜數學1下 CH1-2 互動學習單</title>
+<meta name="description" content="國中數學一年級下學期 CH1-2 二元一次聯立方程式：代入消去法、加減消去法、應用問題，互動學習單">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left:'$$',right:'$$',display:true},
+      {left:'$',right:'$',display:false}
+    ]
+  });"></script>
+
+<style>
+/* ═══════════════════════════════════════════════
+   MIDNIGHT DARK THEME — 核心配色體系
+   依循 NTNU Curator Skill 規範
+════════════════════════════════════════════════ */
+:root {
+  --bg-canvas:      #070b14;
+  --bg-card:        #0b1329;
+  --bg-card-hover:  rgba(15, 23, 42, 0.90);
+  --bg-glass:       rgba(30, 41, 59, 0.72);
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-bright:  rgba(255, 255, 255, 0.16);
+
+  --neon-sky:       #38bdf8;
+  --neon-ocean:     #0284c7;
+  --neon-emerald:   #34d399;
+  --neon-rose:      #fb7185;
+  --neon-amber:     #fbbf24;
+  --neon-violet:    #a78bfa;
+  --neon-teal:      #2dd4bf;
+
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+
+  --font-main: 'Noto Sans TC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 18px;
+  line-height: 1.85;
+  min-height: 100vh;
+  text-wrap: pretty;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(56,189,248,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(167,139,250,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(251,191,36,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Header ─── */
+header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 56px 24px 40px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(11,19,41,0.95) 0%, transparent 100%);
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56,189,248,0.12);
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 14px;
+  color: var(--neon-sky);
+  font-weight: 500;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+header h1 {
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #e2e8f0 0%, var(--neon-sky) 50%, var(--neon-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+header .subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.tag {
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.tag-sky    { color: var(--neon-sky);     border-color: rgba(56,189,248,0.4);  background: rgba(56,189,248,0.08); }
+.tag-green  { color: var(--neon-emerald); border-color: rgba(52,211,153,0.4);  background: rgba(52,211,153,0.08); }
+.tag-rose   { color: var(--neon-rose);    border-color: rgba(251,113,133,0.4); background: rgba(251,113,133,0.08); }
+.tag-amber  { color: var(--neon-amber);   border-color: rgba(251,191,36,0.4);  background: rgba(251,191,36,0.08); }
+.tag-violet { color: var(--neon-violet);  border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08); }
+
+/* ─── Nav ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7,11,20,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+  white-space: nowrap;
+}
+nav a:hover { color: var(--neon-sky); border-bottom-color: var(--neon-sky); }
+
+/* ─── Main ─── */
+main {
+  position: relative;
+  z-index: 5;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ─── Section Header ─── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.section-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.section-number {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
+  display: block;
+}
+
+/* ─── Cards ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+}
+
+.card-sky::before    { background: var(--neon-sky); }
+.card-green::before  { background: var(--neon-emerald); }
+.card-rose::before   { background: var(--neon-rose); }
+.card-amber::before  { background: var(--neon-amber); }
+.card-violet::before { background: var(--neon-violet); }
+.card-teal::before   { background: var(--neon-teal); }
+
+.card:hover.card-sky    { box-shadow: 0 4px 32px rgba(56,189,248,0.12); }
+.card:hover.card-green  { box-shadow: 0 4px 32px rgba(52,211,153,0.12); }
+.card:hover.card-rose   { box-shadow: 0 4px 32px rgba(251,113,133,0.12); }
+.card:hover.card-amber  { box-shadow: 0 4px 32px rgba(251,191,36,0.12); }
+.card:hover.card-violet { box-shadow: 0 4px 32px rgba(167,139,250,0.12); }
+
+.card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card p, .card li {
+  font-size: 18px;
+  color: var(--text-primary);
+  line-height: 1.9;
+}
+
+.card ul, .card ol { padding-left: 22px; }
+.card li { margin-bottom: 6px; }
+
+/* ─── Def Box ─── */
+.def-box {
+  background: rgba(56,189,248,0.06);
+  border: 1px solid rgba(56,189,248,0.25);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin: 16px 0;
+  position: relative;
+}
+
+.def-box::before {
+  content: '定義';
+  position: absolute;
+  top: -10px; left: 16px;
+  background: var(--neon-sky);
+  color: #070b14;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+}
+
+.def-box.green  { background: rgba(52,211,153,0.06);  border-color: rgba(52,211,153,0.25); }
+.def-box.green::before  { background: var(--neon-emerald); content: '方法'; }
+.def-box.rose   { background: rgba(251,113,133,0.06); border-color: rgba(251,113,133,0.25); }
+.def-box.rose::before   { background: var(--neon-rose);    content: '方法'; }
+.def-box.amber  { background: rgba(251,191,36,0.06);  border-color: rgba(251,191,36,0.25); }
+.def-box.amber::before  { background: var(--neon-amber);   content: '重點'; }
+.def-box.violet { background: rgba(167,139,250,0.06); border-color: rgba(167,139,250,0.25); }
+.def-box.violet::before { background: var(--neon-violet);  content: '觀念'; }
+
+/* ─── Math Block ─── */
+.math-block {
+  background: rgba(7,11,20,0.8);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-md);
+  padding: 20px 28px;
+  margin: 18px 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* ─── Steps ─── */
+.steps {
+  counter-reset: step-counter;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-item {
+  counter-increment: step-counter;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  background: var(--bg-glass);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.step-item:hover { background: rgba(30,41,59,0.9); }
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+.step-num::before { content: counter(step-counter); }
+
+.steps-green .step-num { background: rgba(52,211,153,0.2);  color: var(--neon-emerald); border: 1px solid rgba(52,211,153,0.4); }
+.steps-rose  .step-num { background: rgba(251,113,133,0.2); color: var(--neon-rose);    border: 1px solid rgba(251,113,133,0.4); }
+.steps-amber .step-num { background: rgba(251,191,36,0.2);  color: var(--neon-amber);   border: 1px solid rgba(251,191,36,0.4); }
+
+.step-content { flex: 1; font-size: 18px; }
+
+/* ─── Example Box ─── */
+.example-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.example-header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.example-header:hover { background: var(--bg-glass); }
+
+.example-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.example-badge {
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.toggle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: transform 0.3s, background 0.2s;
+  flex-shrink: 0;
+}
+.toggle-btn.open { transform: rotate(180deg); }
+
+.example-question {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.example-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.example-answer.open { max-height: 2000px; }
+
+.answer-inner {
+  padding: 0 24px 24px;
+  border-top: 1px dashed var(--border-bright);
+}
+
+.answer-inner h4 {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 16px 0 10px;
+}
+
+/* ─── Practice ─── */
+.practice-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin: 20px 0;
+}
+
+.practice-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fill-blank {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 18px;
+  margin: 12px 0;
+  line-height: 2.2;
+}
+
+.blank-input {
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: var(--radius-sm);
+  color: var(--neon-sky);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 4px 12px;
+  min-width: 60px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.blank-input:focus {
+  border-color: var(--neon-sky);
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+}
+
+.blank-input.correct {
+  border-color: var(--neon-emerald);
+  background: rgba(52,211,153,0.12);
+  color: var(--neon-emerald);
+}
+
+.blank-input.wrong {
+  border-color: var(--neon-rose);
+  background: rgba(251,113,133,0.12);
+  color: var(--neon-rose);
+}
+
+.check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+}
+
+.check-btn-sky    { background: rgba(56,189,248,0.15);  color: var(--neon-sky);     border: 1px solid rgba(56,189,248,0.4); }
+.check-btn-green  { background: rgba(52,211,153,0.15);  color: var(--neon-emerald); border: 1px solid rgba(52,211,153,0.4); }
+.check-btn-rose   { background: rgba(251,113,133,0.15); color: var(--neon-rose);    border: 1px solid rgba(251,113,133,0.4); }
+.check-btn-amber  { background: rgba(251,191,36,0.15);  color: var(--neon-amber);   border: 1px solid rgba(251,191,36,0.4); }
+.check-btn-violet { background: rgba(167,139,250,0.15); color: var(--neon-violet);  border: 1px solid rgba(167,139,250,0.4); }
+
+.check-btn:hover  { transform: translateY(-1px); filter: brightness(1.15); }
+.check-btn:active { transform: translateY(0); }
+
+.feedback-msg {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.feedback-msg.show-correct {
+  display: block;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.3);
+  color: var(--neon-emerald);
+}
+
+.feedback-msg.show-wrong {
+  display: block;
+  background: rgba(251,113,133,0.1);
+  border: 1px solid rgba(251,113,133,0.3);
+  color: var(--neon-rose);
+}
+
+/* ─── Calc Area ─── */
+.calc-area {
+  background: rgba(7,11,20,0.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+
+.calc-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* ─── Compare Table ─── */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 17px;
+}
+
+.compare-table th {
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border-bright);
+}
+
+.compare-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.75;
+  vertical-align: top;
+}
+
+.compare-table tr:hover td { background: var(--bg-glass); }
+
+.th-sky    { color: var(--neon-sky);     border-bottom-color: rgba(56,189,248,0.5) !important; }
+.th-green  { color: var(--neon-emerald); border-bottom-color: rgba(52,211,153,0.5) !important; }
+.th-rose   { color: var(--neon-rose);    border-bottom-color: rgba(251,113,133,0.5) !important; }
+.th-amber  { color: var(--neon-amber);   border-bottom-color: rgba(251,191,36,0.5) !important; }
+
+/* ─── Quiz ─── */
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin: 16px 0;
+  transition: border-color 0.3s;
+}
+.quiz-card:hover { border-color: rgba(167,139,250,0.4); }
+
+.quiz-q {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.quiz-num {
+  color: var(--neon-violet);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  user-select: none;
+}
+
+.quiz-opt:hover {
+  background: rgba(167,139,250,0.1);
+  border-color: rgba(167,139,250,0.3);
+}
+
+.quiz-opt.selected-correct {
+  background: rgba(52,211,153,0.12);
+  border-color: rgba(52,211,153,0.5);
+  color: var(--neon-emerald);
+  cursor: default;
+}
+
+.quiz-opt.selected-wrong {
+  background: rgba(251,113,133,0.12);
+  border-color: rgba(251,113,133,0.5);
+  color: var(--neon-rose);
+  cursor: default;
+}
+
+.quiz-opt.locked { cursor: default; }
+
+.opt-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(167,139,250,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.quiz-explain {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: rgba(167,139,250,0.06);
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  color: var(--text-secondary);
+  display: none;
+  line-height: 1.8;
+}
+.quiz-explain.visible { display: block; }
+
+/* ─── Scoreboard ─── */
+.scoreboard {
+  background: linear-gradient(135deg, rgba(11,19,41,0.9), rgba(11,19,41,0.7));
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin: 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.score-display { text-align: center; }
+
+.score-num {
+  font-size: 52px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, var(--neon-violet), var(--neon-sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.score-bar-container { flex: 1; min-width: 200px; }
+
+.score-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.score-bar {
+  height: 12px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--neon-violet), var(--neon-sky));
+  width: 0%;
+  transition: width 0.8s ease;
+}
+
+/* ─── Solution Steps ─── */
+.solution-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sol-step {
+  display: flex;
+  gap: 14px;
+  padding: 12px 16px;
+  background: var(--bg-glass);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 17px;
+}
+
+.sol-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--neon-teal);
+  padding-top: 2px;
+  flex-shrink: 0;
+  width: 28px;
+}
+
+/* ─── Grid ─── */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+
+/* ─── Alert ─── */
+.alert {
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-size: 17px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.alert-tip  { background: rgba(251,191,36,0.08);  border: 1px solid rgba(251,191,36,0.25); }
+.alert-warn { background: rgba(251,113,133,0.08); border: 1px solid rgba(251,113,133,0.25); }
+.alert-info { background: rgba(56,189,248,0.08);  border: 1px solid rgba(56,189,248,0.25); }
+.alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Highlights ─── */
+.hi-sky    { color: var(--neon-sky);     font-weight: 600; }
+.hi-green  { color: var(--neon-emerald); font-weight: 600; }
+.hi-rose   { color: var(--neon-rose);    font-weight: 600; }
+.hi-amber  { color: var(--neon-amber);   font-weight: 600; }
+.hi-violet { color: var(--neon-violet);  font-weight: 600; }
+.hi-teal   { color: var(--neon-teal);    font-weight: 600; }
+
+section { margin-bottom: 64px; }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: 15px;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 5;
+}
+
+@media (max-width: 768px) {
+  header { padding: 36px 18px 28px; }
+  main { padding: 32px 16px 60px; }
+  .card { padding: 20px 18px; }
+  .compare-table { font-size: 15px; }
+  .compare-table th, .compare-table td { padding: 10px 12px; }
+  .scoreboard { flex-direction: column; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <div class="header-badge">📐 數學1下｜CH 1-2</div>
+  <h1>二元一次聯立方程式</h1>
+  <p class="subtitle">代入消去法 · 加減消去法 · 應用問題 — 互動學習單</p>
+  <div class="header-tags">
+    <span class="tag tag-sky">📖 定義與概念</span>
+    <span class="tag tag-green">🔄 代入消去法</span>
+    <span class="tag tag-rose">➕ 加減消去法</span>
+    <span class="tag tag-amber">📝 應用問題</span>
+    <span class="tag tag-violet">✅ 自我評量</span>
+  </div>
+</header>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <a href="#sec-concept">📖 定義概念</a>
+  <a href="#sec-substitution">🔄 代入消去</a>
+  <a href="#sec-elimination">➕ 加減消去</a>
+  <a href="#sec-compare">🔀 方法比較</a>
+  <a href="#sec-application">📝 應用問題</a>
+  <a href="#sec-quiz">✅ 自我評量</a>
+</nav>
+
+<!-- ══════════ MAIN ══════════ -->
+<main>
+
+<!-- 學習目標 -->
+<div class="card card-sky" style="border-color: rgba(56,189,248,0.25); margin-bottom: 40px;">
+  <h3 style="color: var(--neon-sky);">🎯 本章學習目標</h3>
+  <div class="grid-3">
+    <div style="padding: 14px 16px; background: rgba(56,189,248,0.06); border-radius: var(--radius-md); border: 1px solid rgba(56,189,248,0.15);">
+      <div style="font-size: 22px; margin-bottom: 6px;">① 理解概念</div>
+      <div style="font-size: 16px; color: var(--text-secondary);">能說出二元一次方程式與聯立方程式的定義及解的意義</div>
+    </div>
+    <div style="padding: 14px 16px; background: rgba(52,211,153,0.06); border-radius: var(--radius-md); border: 1px solid rgba(52,211,153,0.15);">
+      <div style="font-size: 22px; margin-bottom: 6px;">② 掌握方法</div>
+      <div style="font-size: 16px; color: var(--text-secondary);">熟練運用代入消去法與加減消去法求解聯立方程式</div>
+    </div>
+    <div style="padding: 14px 16px; background: rgba(251,191,36,0.06); border-radius: var(--radius-md); border: 1px solid rgba(251,191,36,0.15);">
+      <div style="font-size: 22px; margin-bottom: 6px;">③ 解決問題</div>
+      <div style="font-size: 16px; color: var(--text-secondary);">能將文字應用問題轉化為聯立方程式並求解</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PART 01：定義與概念
+════════════════════════════════════ -->
+<section id="sec-concept">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(56,189,248,0.15); color: var(--neon-sky); border: 1px solid rgba(56,189,248,0.3);">📖</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-sky);">PART 01</span>
+      <h2>定義與基本概念</h2>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-sky">
+      <h3 style="color: var(--neon-sky);">二元一次方程式</h3>
+      <div class="def-box">
+        含有<span class="hi-sky">兩個未知數</span>，且每個未知數的次數都是<span class="hi-sky">一次</span>的方程式，稱為<strong>二元一次方程式</strong>
+      </div>
+      <div class="math-block">$ax + by = c$ &ensp;（$a, b$ 不全為零）</div>
+      <p style="font-size: 17px; color: var(--text-secondary);">判斷練習：</p>
+      <ul style="margin-top: 8px;">
+        <li>$2x + 3y = 7$ &nbsp;✅ 二元一次</li>
+        <li>$x - 4y = 0$ &nbsp;✅ 二元一次</li>
+        <li>$x^2 + y = 5$ &nbsp;❌ 有二次項</li>
+        <li>$xyz = 3$ &nbsp;❌ 三個未知數</li>
+        <li>$5x = 10$ &nbsp;❌ 只有一個未知數</li>
+      </ul>
+    </div>
+
+    <div class="card card-sky">
+      <h3 style="color: var(--neon-sky);">方程式的解</h3>
+      <div class="def-box">
+        能使二元一次方程式等號成立的<span class="hi-sky">一組 $(x, y)$ 值</span>，稱為這個方程式的<strong>解</strong>
+      </div>
+      <div class="alert alert-info">
+        <span class="alert-icon">💡</span>
+        <div>單一二元一次方程式通常有<strong>無窮多組解</strong>，對應平面上的一條直線</div>
+      </div>
+      <p style="font-size: 17px; margin-top: 12px;">例：$2x + y = 5$ 的部分解</p>
+      <div class="math-block" style="text-align: left; font-size: 17px;">
+        $(1, 3)$：$2(1)+3=5$ ✅<br>
+        $(2, 1)$：$2(2)+1=5$ ✅<br>
+        $(0, 5)$：$2(0)+5=5$ ✅
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-sky">
+    <h3 style="color: var(--neon-sky);">二元一次聯立方程式</h3>
+    <div class="grid-2">
+      <div>
+        <div class="def-box">
+          由<span class="hi-sky">兩個二元一次方程式</span>組成的方程式組，稱為<strong>二元一次聯立方程式</strong>；能同時滿足兩式的 $(x, y)$，稱為此聯立方程式的<strong>解</strong>
+        </div>
+        <div class="math-block">
+          $\begin{cases} a_1 x + b_1 y = c_1 \\ a_2 x + b_2 y = c_2 \end{cases}$
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-tip" style="margin-top: 0;">
+          <span class="alert-icon">🌟</span>
+          <div><strong>幾何意義：</strong>聯立方程式的解就是兩條直線的<strong>交點座標</strong><br><br>
+          — 通常有<strong>唯一解</strong>（相交）<br>
+          — 也可能<strong>無解</strong>（平行，不相交）<br>
+          — 或<strong>無窮多解</strong>（重合）</div>
+        </div>
+        <p style="font-size: 17px; margin-top: 14px;">例：以下的解為 $(2, 1)$</p>
+        <div class="math-block" style="text-align: left; font-size: 17px;">
+          $\begin{cases} x + y = 3 \\ x - y = 1 \end{cases}$ → $x=2,\;y=1$
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 填空練習 1 -->
+  <div class="practice-section" style="border-color: rgba(56,189,248,0.25);">
+    <div class="practice-title" style="color: var(--neon-sky);">✏️ 填空練習 — 概念確認</div>
+    <div style="margin: 14px 0;">
+      <div class="fill-blank">
+        <span>1. 含有</span>
+        <input class="blank-input" id="b1" data-answer="兩個" style="width:70px;" placeholder="？">
+        <span>個未知數，且每個未知數的次數都是</span>
+        <input class="blank-input" id="b2" data-answer="一" style="width:50px;" placeholder="？">
+        <span>次的方程式，稱為二元一次方程式</span>
+      </div>
+      <div class="fill-blank">
+        <span>2. 能同時滿足兩個方程式的 $(x, y)$，稱為聯立方程式的</span>
+        <input class="blank-input" id="b3" data-answer="解" style="width:50px;" placeholder="？">
+      </div>
+      <div class="fill-blank">
+        <span>3. 單一二元一次方程式通常有</span>
+        <input class="blank-input" id="b4" data-answer="無窮多" style="width:90px;" placeholder="？">
+        <span>組解，幾何上對應一條</span>
+        <input class="blank-input" id="b5" data-answer="直線" style="width:70px;" placeholder="？">
+      </div>
+    </div>
+    <button class="check-btn check-btn-sky" onclick="checkBlanks(['b1','b2','b3','b4','b5'], 'fb-concept')">🔍 確認答案</button>
+    <div class="feedback-msg" id="fb-concept"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PART 02：代入消去法
+════════════════════════════════════ -->
+<section id="sec-substitution">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(52,211,153,0.15); color: var(--neon-emerald); border: 1px solid rgba(52,211,153,0.3);">🔄</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-emerald);">PART 02</span>
+      <h2>代入消去法</h2>
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <h3 style="color: var(--neon-emerald);">方法核心概念</h3>
+    <div class="def-box green">
+      從一個方程式中將某個未知數<span class="hi-green">用另一個未知數的算式表示</span>，再<span class="hi-green">代入</span>另一個方程式，消去一個未知數，從而求解
+    </div>
+    <h4 style="margin: 20px 0 14px; font-size: 18px; color: var(--neon-emerald);">解題步驟</h4>
+    <ol class="steps steps-green">
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">選取<strong>係數較小或易整理</strong>的一式，將某個未知數用另一未知數表示</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">將整理出的算式<strong>代入</strong>另一式，得到只含一個未知數的方程式</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">解一元一次方程式，求出<strong>第一個未知數</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">代回任一原式，求出<strong>第二個未知數</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">代入兩式<strong>驗算</strong></div>
+      </li>
+    </ol>
+    <div class="alert alert-tip" style="margin-top: 16px;">
+      <span class="alert-icon">💡</span>
+      <div>技巧：優先選擇<strong>係數為 ±1</strong> 的項整理，可避免出現分數</div>
+    </div>
+  </div>
+
+  <!-- 例題 1 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(52,211,153,0.15); color: var(--neon-emerald); border: 1px solid rgba(52,211,153,0.4);">例題 1</span>
+        <span>基礎題｜直接代入</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      用代入消去法解：
+      $$\begin{cases} y = 2x - 1 \quad \cdots① \\ 3x + y = 9 \quad \cdots② \end{cases}$$
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 解題過程</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">S1</div>
+            <div>①式已有 $y = 2x-1$ 形式，直接代入②</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S2</div>
+            <div>代入②：$3x + (2x-1) = 9$ &ensp;→&ensp; $5x = 10$ &ensp;→&ensp; $x = 2$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S3</div>
+            <div>代回①：$y = 2(2)-1 = 3$</div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.05);">
+            <div class="sol-num" style="color: var(--neon-emerald);">✅</div>
+            <div><strong>解為 $(2, 3)$</strong> &ensp; 驗算①：$3=2(2)-1$ ✅ &ensp; 驗算②：$3(2)+3=9$ ✅</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 例題 2 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(52,211,153,0.15); color: var(--neon-emerald); border: 1px solid rgba(52,211,153,0.4);">例題 2</span>
+        <span>進階題｜先整理再代入</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      用代入消去法解：
+      $$\begin{cases} 2x + y = 8 \quad \cdots① \\ x - 3y = -1 \quad \cdots② \end{cases}$$
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 解題過程</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">S1</div>
+            <div>由①整理（$y$ 係數為 1 較易）：$y = 8 - 2x$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S2</div>
+            <div>代入②：$x - 3(8-2x) = -1$ &ensp;→&ensp; $x - 24 + 6x = -1$ &ensp;→&ensp; $7x = 23$ &ensp;→&ensp; $x = \dfrac{23}{7}$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S2'</div>
+            <div>
+              <span style="color: var(--neon-amber);">※ 改由②整理 $x = 3y-1$，代入①更簡便：</span><br>
+              $2(3y-1)+y=8$ → $7y=10$ → $y=\dfrac{10}{7}$，$x=3\cdot\dfrac{10}{7}-1=\dfrac{23}{7}$
+            </div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.05);">
+            <div class="sol-num" style="color: var(--neon-emerald);">✅</div>
+            <div><strong>解為 $x=\dfrac{23}{7},\;y=\dfrac{10}{7}$</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 代入消去法練習 -->
+  <div class="practice-section" style="border-color: rgba(52,211,153,0.25);">
+    <div class="practice-title" style="color: var(--neon-emerald);">✏️ 代入消去法練習</div>
+    <p style="margin-bottom: 18px; font-size: 17px;">解以下聯立方程式，填入各步驟的關鍵值：</p>
+    $$\begin{cases} y = x + 3 \quad \cdots① \\ 2x + y = 12 \quad \cdots② \end{cases}$$
+
+    <div class="calc-area">
+      <div class="calc-row">
+        <span>將①代入②：$2x +$&nbsp;</span>
+        <input class="blank-input" id="sub_a" data-answer="(x+3)" style="width:90px;" placeholder="(　)">
+        <span>&nbsp;$= 12$</span>
+      </div>
+      <div class="calc-row">
+        <span>整理得：$3x =$</span>
+        <input class="blank-input" id="sub_b" data-answer="9" style="width:60px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>故 $x =$</span>
+        <input class="blank-input" id="sub_c" data-answer="3" style="width:60px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>代回①：$y =$</span>
+        <input class="blank-input" id="sub_d" data-answer="6" style="width:60px;" placeholder="？">
+      </div>
+    </div>
+    <button class="check-btn check-btn-green" onclick="checkBlanks(['sub_a','sub_b','sub_c','sub_d'], 'fb-sub')">🔍 確認答案</button>
+    <div class="feedback-msg" id="fb-sub"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PART 03：加減消去法
+════════════════════════════════════ -->
+<section id="sec-elimination">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(251,113,133,0.15); color: var(--neon-rose); border: 1px solid rgba(251,113,133,0.3);">➕</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-rose);">PART 03</span>
+      <h2>加減消去法</h2>
+    </div>
+  </div>
+
+  <div class="card card-rose">
+    <h3 style="color: var(--neon-rose);">方法核心概念</h3>
+    <div class="def-box rose">
+      將兩方程式加減，使某個未知數的<span class="hi-rose">係數互相抵消（消去）</span>，得到只含一個未知數的方程式再求解
+    </div>
+
+    <div class="grid-2" style="margin-top: 20px;">
+      <div>
+        <p style="color: var(--neon-rose); font-weight: 700; margin-bottom: 10px;">情形一：係數互為相反數 → 相加</p>
+        <div class="math-block" style="text-align: left; font-size: 17px;">
+          $\begin{cases} 3x + 2y = 11 \\ x - 2y = 1 \end{cases}$<br><br>
+          兩式相加：$4x = 12 \Rightarrow x=3$
+        </div>
+      </div>
+      <div>
+        <p style="color: var(--neon-rose); font-weight: 700; margin-bottom: 10px;">情形二：係數相同 → 相減</p>
+        <div class="math-block" style="text-align: left; font-size: 17px;">
+          $\begin{cases} 3x + 2y = 11 \\ 3x - y = 5 \end{cases}$<br><br>
+          兩式相減：$3y = 6 \Rightarrow y=2$
+        </div>
+      </div>
+    </div>
+
+    <h4 style="margin: 20px 0 14px; font-size: 18px; color: var(--neon-rose);">解題步驟</h4>
+    <ol class="steps steps-rose">
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">觀察兩式，決定要<strong>消去哪個未知數</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">若係數不適合直接消去，將兩式各乘以適當倍數使某一未知數係數的<strong>絕對值相等</strong>（取 LCM）</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">係數<strong>互為相反數</strong> → 兩式<strong>相加</strong>；係數<strong>相同</strong> → 兩式<strong>相減</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">解出一個未知數後，<strong>代回</strong>任一原式求另一未知數</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content">代入兩式<strong>驗算</strong></div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 例題 3 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(251,113,133,0.15); color: var(--neon-rose); border: 1px solid rgba(251,113,133,0.4);">例題 3</span>
+        <span>基礎題｜直接相加消去</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      用加減消去法解：
+      $$\begin{cases} 2x + 3y = 13 \quad \cdots① \\ 4x - 3y = 5 \quad \cdots② \end{cases}$$
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 解題過程</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">S1</div>
+            <div>$y$ 的係數 $+3$ 和 $-3$ 互為相反數，兩式相加消去 $y$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S2</div>
+            <div>①＋②：$(2x+3y)+(4x-3y)=13+5$ &ensp;→&ensp; $6x=18$ &ensp;→&ensp; $x=3$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S3</div>
+            <div>代入①：$2(3)+3y=13$ &ensp;→&ensp; $3y=7$ &ensp;→&ensp; $y=\dfrac{7}{3}$</div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(251,113,133,0.4); background: rgba(251,113,133,0.05);">
+            <div class="sol-num" style="color: var(--neon-rose);">✅</div>
+            <div><strong>解為 $x=3,\;y=\dfrac{7}{3}$</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 例題 4 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(251,113,133,0.15); color: var(--neon-rose); border: 1px solid rgba(251,113,133,0.4);">例題 4</span>
+        <span>進階題｜先乘倍數再消去</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      用加減消去法解：
+      $$\begin{cases} 3x + 2y = 16 \quad \cdots① \\ 2x + 5y = 17 \quad \cdots② \end{cases}$$
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 解題過程（消去 $x$）</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">S1</div>
+            <div>$x$ 的係數 3 和 2，LCM＝6；① × 2，② × 3</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S2</div>
+            <div>① × 2：$6x + 4y = 32$ &ensp;$\cdots$③<br>② × 3：$6x + 15y = 51$ &ensp;$\cdots$④</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S3</div>
+            <div>④ − ③（消去 $x$）：$11y = 19$ &ensp;→&ensp; $y = \dfrac{19}{11}$</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">S4</div>
+            <div>代回①：$3x + 2\cdot\dfrac{19}{11}=16$ &ensp;→&ensp; $x = \dfrac{46}{11}$</div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(251,113,133,0.4); background: rgba(251,113,133,0.05);">
+            <div class="sol-num" style="color: var(--neon-rose);">✅</div>
+            <div><strong>解為 $x=\dfrac{46}{11},\;y=\dfrac{19}{11}$</strong></div>
+          </div>
+        </div>
+        <div class="alert alert-tip" style="margin-top: 14px;">
+          <span class="alert-icon">💡</span>
+          <div>乘倍數時取兩係數的<strong>最小公倍數（LCM）</strong>，可使計算量最小</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 加減消去法練習 -->
+  <div class="practice-section" style="border-color: rgba(251,113,133,0.25);">
+    <div class="practice-title" style="color: var(--neon-rose);">✏️ 加減消去法練習</div>
+    <p style="margin-bottom: 18px; font-size: 17px;">解以下聯立方程式，填入關鍵步驟：</p>
+    $$\begin{cases} 5x + 2y = 16 \quad \cdots① \\ 3x + 2y = 12 \quad \cdots② \end{cases}$$
+
+    <div class="calc-area">
+      <div class="calc-row">
+        <span>兩式 $y$ 係數相同，①</span>
+        <input class="blank-input" id="el_a" data-answer="−" style="width:50px;" placeholder="±">
+        <span>② 消去 $y$</span>
+      </div>
+      <div class="calc-row">
+        <span>得：$2x =$</span>
+        <input class="blank-input" id="el_b" data-answer="4" style="width:60px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>故 $x =$</span>
+        <input class="blank-input" id="el_c" data-answer="2" style="width:60px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>代入②：$2y =$</span>
+        <input class="blank-input" id="el_d" data-answer="6" style="width:60px;" placeholder="？">
+        <span>，$y =$</span>
+        <input class="blank-input" id="el_e" data-answer="3" style="width:60px;" placeholder="？">
+      </div>
+    </div>
+    <button class="check-btn check-btn-rose" onclick="checkBlanks(['el_a','el_b','el_c','el_d','el_e'], 'fb-elim')">🔍 確認答案</button>
+    <div class="feedback-msg" id="fb-elim"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PART 04：方法比較
+════════════════════════════════════ -->
+<section id="sec-compare">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(45,212,191,0.15); color: var(--neon-teal); border: 1px solid rgba(45,212,191,0.3);">🔀</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-teal);">PART 04</span>
+      <h2>兩種方法的比較與選擇</h2>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <h3 style="color: var(--neon-teal);">方法選擇策略</h3>
+    <div style="overflow-x: auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="th-sky">比較項目</th>
+            <th class="th-green">🔄 代入消去法</th>
+            <th class="th-rose">➕ 加減消去法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>核心動作</strong></td>
+            <td>用算式代替未知數</td>
+            <td>兩式相加或相減</td>
+          </tr>
+          <tr>
+            <td><strong>最適情境</strong></td>
+            <td>某式已有 $x=$ 或 $y=$ 形式，或某項係數為 $\pm1$</td>
+            <td>兩式某個未知數的係數相同或互為相反數</td>
+          </tr>
+          <tr>
+            <td><strong>主要優點</strong></td>
+            <td>步驟直觀，容易理解</td>
+            <td>處理較大係數時計算量小</td>
+          </tr>
+          <tr>
+            <td><strong>常見錯誤</strong></td>
+            <td>代入時忘記分配律（括號沒乘好）</td>
+            <td>相加減時符號判斷錯誤</td>
+          </tr>
+          <tr>
+            <td><strong>適用判斷例</strong></td>
+            <td style="color: var(--neon-emerald);">$\begin{cases} y = 3x-2 \\ 2x+y=8 \end{cases}$ 👈 優先選此法</td>
+            <td style="color: var(--neon-rose);">$\begin{cases} 3x+4y=14 \\ 3x-2y=8 \end{cases}$ 👈 優先選此法</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-warn" style="margin-top: 20px;">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>萬能原則：</strong>兩種方法求出的答案完全相同，可依個人習慣選擇</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PART 05：應用問題
+════════════════════════════════════ -->
+<section id="sec-application">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(251,191,36,0.15); color: var(--neon-amber); border: 1px solid rgba(251,191,36,0.3);">📝</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-amber);">PART 05</span>
+      <h2>應用問題</h2>
+    </div>
+  </div>
+
+  <div class="card card-amber">
+    <h3 style="color: var(--neon-amber);">應用問題解題四步驟</h3>
+    <div class="def-box amber">將文字敘述轉化為數學式，建立聯立方程式求解，再將答案回歸題意</div>
+    <ol class="steps steps-amber" style="margin-top: 16px;">
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content"><strong>設未知數：</strong>設兩個適當的未知數（$x, y$），說明各代表什麼量</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content"><strong>列方程式：</strong>找出題目中的<strong>兩個等量關係</strong>，各列一個方程式組成聯立方程式</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content"><strong>求解：</strong>用代入消去法或加減消去法解聯立方程式</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num"></div>
+        <div class="step-content"><strong>驗算並作答：</strong>代入原題驗算，以<strong>完整句子</strong>回答</div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 例題 5 雞兔同籠 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(251,191,36,0.15); color: var(--neon-amber); border: 1px solid rgba(251,191,36,0.4);">例題 5</span>
+        <span>應用題｜雞兔同籠型</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      雞和兔共 35 隻，腳共 94 隻，則雞有幾隻？兔有幾隻？
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 標準解題格式</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">設</div>
+            <div>設雞有 $x$ 隻，兔有 $y$ 隻</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">列</div>
+            <div>
+              $$\begin{cases} x + y = 35 \quad \cdots①\text{（隻數）} \\ 2x + 4y = 94 \quad \cdots②\text{（腳數）} \end{cases}$$
+            </div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">解</div>
+            <div>
+              由①：$x = 35-y$，代入②：<br>
+              $2(35-y)+4y=94$ &ensp;→&ensp; $70+2y=94$ &ensp;→&ensp; $y=12$<br>
+              代回①：$x=35-12=23$
+            </div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.05);">
+            <div class="sol-num" style="color: var(--neon-amber);">答</div>
+            <div><strong>雞有 23 隻，兔有 12 隻</strong><br>
+              <small style="color: var(--text-secondary);">驗算：$23+12=35$ ✅ &ensp; $23×2+12×4=46+48=94$ ✅</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 例題 6 速度問題 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(251,191,36,0.15); color: var(--neon-amber); border: 1px solid rgba(251,191,36,0.4);">例題 6</span>
+        <span>應用題｜速度時間問題</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      甲、乙兩地相距 180 公里。小安從甲地出發，前段搭汽車（80 km/h），後段騎機車（40 km/h），共花 3 小時。請問各走了多少公里？
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 標準解題格式</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">設</div>
+            <div>設搭汽車走 $x$ 公里，騎機車走 $y$ 公里</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">列</div>
+            <div>
+              $$\begin{cases} x + y = 180 \quad \cdots①\text{（路程）} \\ \dfrac{x}{80}+\dfrac{y}{40}=3 \quad \cdots②\text{（時間）} \end{cases}$$
+            </div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">解</div>
+            <div>
+              ②式 ×80：$x + 2y = 240$ &ensp;$\cdots$③<br>
+              ③ − ①：$y = 60$<br>
+              代回①：$x = 120$
+            </div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.05);">
+            <div class="sol-num" style="color: var(--neon-amber);">答</div>
+            <div><strong>搭汽車走 120 公里，騎機車走 60 公里</strong><br>
+              <small style="color: var(--text-secondary);">驗算：$120+60=180$ ✅ &ensp; $\frac{120}{80}+\frac{60}{40}=1.5+1.5=3$ ✅</small>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-tip" style="margin-top: 14px;">
+          <span class="alert-icon">⭐</span>
+          <div>速度問題記住：$\text{時間}=\dfrac{\text{路程}}{\text{速率}}$，列完方程式後先通分消除分母</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 例題 7 購買問題 -->
+  <div class="example-box">
+    <div class="example-header" onclick="toggleExample(this)">
+      <div class="example-label">
+        <span class="example-badge" style="background: rgba(251,191,36,0.15); color: var(--neon-amber); border: 1px solid rgba(251,191,36,0.4);">例題 7</span>
+        <span>應用題｜購買總價問題</span>
+      </div>
+      <div class="toggle-btn">▼</div>
+    </div>
+    <div class="example-question">
+      3 支鉛筆和 2 本筆記本共 36 元；1 支鉛筆和 4 本筆記本共 28 元。每支鉛筆和每本筆記本各多少元？
+    </div>
+    <div class="example-answer">
+      <div class="answer-inner">
+        <h4>📝 標準解題格式</h4>
+        <div class="solution-steps">
+          <div class="sol-step">
+            <div class="sol-num">設</div>
+            <div>設每支鉛筆 $x$ 元，每本筆記本 $y$ 元</div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">列</div>
+            <div>
+              $$\begin{cases} 3x+2y=36 \quad \cdots① \\ x+4y=28 \quad \cdots② \end{cases}$$
+            </div>
+          </div>
+          <div class="sol-step">
+            <div class="sol-num">解</div>
+            <div>
+              由②整理：$x=28-4y$，代入①：<br>
+              $3(28-4y)+2y=36$ &ensp;→&ensp; $84-12y+2y=36$ &ensp;→&ensp; $-10y=-48$ &ensp;→&ensp; $y=4.8$<br>
+              代回②：$x=28-4(4.8)=28-19.2=8.8$
+            </div>
+          </div>
+          <div class="sol-step" style="border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.05);">
+            <div class="sol-num" style="color: var(--neon-amber);">答</div>
+            <div><strong>鉛筆每支 8.8 元，筆記本每本 4.8 元</strong><br>
+              <small style="color: var(--text-secondary);">驗算：$3(8.8)+2(4.8)=26.4+9.6=36$ ✅ &ensp; $8.8+4(4.8)=8.8+19.2=28$ ✅</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 應用問題練習 -->
+  <div class="practice-section" style="border-color: rgba(251,191,36,0.25);">
+    <div class="practice-title" style="color: var(--neon-amber);">✏️ 應用問題練習</div>
+    <p style="margin-bottom: 16px; font-size: 17px;">
+      某班有男生 $x$ 人、女生 $y$ 人，全班共 40 人，男生比女生多 4 人<br>
+      依題意列方程式並求解：
+    </p>
+    <div class="calc-area">
+      <div class="calc-row">
+        <span>全班人數關係：$x + y =$</span>
+        <input class="blank-input" id="app_a" data-answer="40" style="width:70px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>男多於女關係：$x - y =$</span>
+        <input class="blank-input" id="app_b" data-answer="4" style="width:70px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>兩式相加後：$2x =$</span>
+        <input class="blank-input" id="app_c" data-answer="44" style="width:70px;" placeholder="？">
+        <span>，$x =$</span>
+        <input class="blank-input" id="app_d" data-answer="22" style="width:70px;" placeholder="？">
+      </div>
+      <div class="calc-row">
+        <span>故女生 $y =$</span>
+        <input class="blank-input" id="app_e" data-answer="18" style="width:70px;" placeholder="？">
+        <span>人</span>
+      </div>
+    </div>
+    <button class="check-btn check-btn-amber" onclick="checkBlanks(['app_a','app_b','app_c','app_d','app_e'], 'fb-app')">🔍 確認答案</button>
+    <div class="feedback-msg" id="fb-app"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PART 06：自我評量
+════════════════════════════════════ -->
+<section id="sec-quiz">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(167,139,250,0.15); color: var(--neon-violet); border: 1px solid rgba(167,139,250,0.3);">✅</div>
+    <div>
+      <span class="section-number" style="color: var(--neon-violet);">PART 06</span>
+      <h2>自我評量</h2>
+    </div>
+  </div>
+
+  <!-- 計分板 -->
+  <div class="scoreboard">
+    <div class="score-display">
+      <div class="score-num" id="score-num">0</div>
+      <div class="score-label">/ 6 題</div>
+    </div>
+    <div class="score-bar-container">
+      <div class="score-bar-label">
+        <span>答題進度</span>
+        <span id="score-pct">0%</span>
+      </div>
+      <div class="score-bar"><div class="score-fill" id="score-fill"></div></div>
+      <div style="margin-top: 12px; font-size: 15px; color: var(--text-secondary);" id="score-msg">完成所有題目後，點選「計算成績」即可看見你的評估！</div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="quiz-card" id="qcard-1">
+    <div class="quiz-q"><span class="quiz-num">Q1</span><span>下列哪一個是二元一次方程式？</span></div>
+    <div class="quiz-options" id="q1-opts">
+      <div class="quiz-opt" onclick="selectQuiz(1, this, false)"><span class="opt-dot">A</span> $x^2 + y = 4$（含二次項）</div>
+      <div class="quiz-opt" onclick="selectQuiz(1, this, true)"><span class="opt-dot">B</span> $3x - 2y = 7$</div>
+      <div class="quiz-opt" onclick="selectQuiz(1, this, false)"><span class="opt-dot">C</span> $x + y + z = 1$（三個未知數）</div>
+      <div class="quiz-opt" onclick="selectQuiz(1, this, false)"><span class="opt-dot">D</span> $5x = 10$（只有一個未知數）</div>
+    </div>
+    <div class="quiz-explain" id="qexp-1">
+      ✅ 答案 <strong>B</strong>：$3x-2y=7$ 含兩個未知數 $x, y$，且均為一次，符合定義<br>
+      A 有 $x^2$（二次項）｜C 有三個未知數｜D 為一元一次方程式
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-card" id="qcard-2">
+    <div class="quiz-q"><span class="quiz-num">Q2</span><span>$(1, 3)$ 是否為方程式 $x + 2y = 7$ 的解？</span></div>
+    <div class="quiz-options" id="q2-opts">
+      <div class="quiz-opt" onclick="selectQuiz(2, this, true)"><span class="opt-dot">A</span> 是，代入得 $1 + 6 = 7$，等式成立</div>
+      <div class="quiz-opt" onclick="selectQuiz(2, this, false)"><span class="opt-dot">B</span> 不是，計算結果不等於 7</div>
+      <div class="quiz-opt" onclick="selectQuiz(2, this, false)"><span class="opt-dot">C</span> 無法判斷</div>
+    </div>
+    <div class="quiz-explain" id="qexp-2">
+      ✅ 答案 <strong>A</strong>：$x=1, y=3$ 代入：$1 + 2(3) = 1 + 6 = 7$ ✅，等式成立，故 $(1,3)$ 是解
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-card" id="qcard-3">
+    <div class="quiz-q"><span class="quiz-num">Q3</span><span>解聯立方程式 $\begin{cases} y = x - 2 \\ 3x + y = 10 \end{cases}$，解為？</span></div>
+    <div class="quiz-options" id="q3-opts">
+      <div class="quiz-opt" onclick="selectQuiz(3, this, false)"><span class="opt-dot">A</span> $x=2,\;y=0$</div>
+      <div class="quiz-opt" onclick="selectQuiz(3, this, true)"><span class="opt-dot">B</span> $x=3,\;y=1$</div>
+      <div class="quiz-opt" onclick="selectQuiz(3, this, false)"><span class="opt-dot">C</span> $x=4,\;y=2$</div>
+      <div class="quiz-opt" onclick="selectQuiz(3, this, false)"><span class="opt-dot">D</span> $x=1,\;y=-1$</div>
+    </div>
+    <div class="quiz-explain" id="qexp-3">
+      ✅ 答案 <strong>B</strong>：代入消去——$3x+(x-2)=10$ → $4x=12$ → $x=3$，$y=3-2=1$
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-card" id="qcard-4">
+    <div class="quiz-q"><span class="quiz-num">Q4</span><span>解 $\begin{cases} 5x + 2y = 14 \\ 5x - 2y = 6 \end{cases}$，最適合的方法與解為？</span></div>
+    <div class="quiz-options" id="q4-opts">
+      <div class="quiz-opt" onclick="selectQuiz(4, this, false)"><span class="opt-dot">A</span> 代入消去法；$x=2, y=3$</div>
+      <div class="quiz-opt" onclick="selectQuiz(4, this, false)"><span class="opt-dot">B</span> 加減消去法；$x=1, y=2$</div>
+      <div class="quiz-opt" onclick="selectQuiz(4, this, true)"><span class="opt-dot">C</span> 加減消去法；$x=2, y=2$</div>
+      <div class="quiz-opt" onclick="selectQuiz(4, this, false)"><span class="opt-dot">D</span> 代入消去法；$x=3, y=1$</div>
+    </div>
+    <div class="quiz-explain" id="qexp-4">
+      ✅ 答案 <strong>C</strong>：$x$ 係數均為 5，最適合加減消去法<br>
+      兩式相加：$10x=20$ → $x=2$；兩式相減：$4y=8$ → $y=2$
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-card" id="qcard-5">
+    <div class="quiz-q"><span class="quiz-num">Q5</span><span>某班共 42 人，男生比女生多 6 人，女生有幾人？</span></div>
+    <div class="quiz-options" id="q5-opts">
+      <div class="quiz-opt" onclick="selectQuiz(5, this, false)"><span class="opt-dot">A</span> 16 人</div>
+      <div class="quiz-opt" onclick="selectQuiz(5, this, false)"><span class="opt-dot">B</span> 20 人</div>
+      <div class="quiz-opt" onclick="selectQuiz(5, this, true)"><span class="opt-dot">C</span> 18 人</div>
+      <div class="quiz-opt" onclick="selectQuiz(5, this, false)"><span class="opt-dot">D</span> 24 人</div>
+    </div>
+    <div class="quiz-explain" id="qexp-5">
+      ✅ 答案 <strong>C</strong>：設男 $x$，女 $y$<br>
+      $\begin{cases} x+y=42 \\ x-y=6 \end{cases}$，兩式相加：$2x=48$，$x=24$；代回：$y=42-24=18$
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-card" id="qcard-6">
+    <div class="quiz-q"><span class="quiz-num">Q6</span><span>一個兩位數，各位數字和為 9，個位數字比十位數字大 3，此兩位數為？</span></div>
+    <div class="quiz-options" id="q6-opts">
+      <div class="quiz-opt" onclick="selectQuiz(6, this, false)"><span class="opt-dot">A</span> 27</div>
+      <div class="quiz-opt" onclick="selectQuiz(6, this, false)"><span class="opt-dot">B</span> 45</div>
+      <div class="quiz-opt" onclick="selectQuiz(6, this, true)"><span class="opt-dot">C</span> 36</div>
+      <div class="quiz-opt" onclick="selectQuiz(6, this, false)"><span class="opt-dot">D</span> 63</div>
+    </div>
+    <div class="quiz-explain" id="qexp-6">
+      ✅ 答案 <strong>C</strong>：設十位數字為 $x$，個位數字為 $y$<br>
+      $\begin{cases} x+y=9 \\ y-x=3 \end{cases}$，兩式相加：$2y=12$，$y=6$；$x=3$<br>
+      兩位數為 $10x+y=30+6=\mathbf{36}$
+    </div>
+  </div>
+
+  <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <button class="check-btn check-btn-violet" onclick="finalScore()" style="font-size: 17px; padding: 14px 32px;">
+      🎯 計算最終成績
+    </button>
+    <button class="check-btn" onclick="resetQuiz()" style="font-size: 17px; padding: 14px 32px; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border);">
+      🔄 重新作答
+    </button>
+  </div>
+</section>
+
+<!-- 重點總覽 -->
+<section>
+  <hr class="divider">
+  <div class="card" style="border-color: rgba(167,139,250,0.25);">
+    <h3 style="color: var(--neon-violet); font-size: 22px;">📋 本章重點總覽</h3>
+    <div class="grid-3" style="margin-top: 18px;">
+      <div style="padding: 18px; background: rgba(56,189,248,0.06); border-radius: var(--radius-md); border: 1px solid rgba(56,189,248,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-sky); margin-bottom: 10px;">📖 定義</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>二元一次方程式：含 2 未知數，各為 1 次</li>
+          <li>聯立方程式的解：同時滿足兩式的 $(x,y)$</li>
+          <li>幾何意義：兩直線的交點</li>
+        </ul>
+      </div>
+      <div style="padding: 18px; background: rgba(52,211,153,0.06); border-radius: var(--radius-md); border: 1px solid rgba(52,211,153,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-emerald); margin-bottom: 10px;">🔄 代入消去</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>整理出 $x=$ 或 $y=$ 的形式</li>
+          <li>代入另一式消去一個未知數</li>
+          <li>適合係數為 ±1 的情況</li>
+        </ul>
+      </div>
+      <div style="padding: 18px; background: rgba(251,113,133,0.06); border-radius: var(--radius-md); border: 1px solid rgba(251,113,133,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-rose); margin-bottom: 10px;">➕ 加減消去</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>乘倍數（LCM）使係數絕對值相等</li>
+          <li>互為相反數→相加；相同→相減</li>
+          <li>適合係數較大的情況</li>
+        </ul>
+      </div>
+      <div style="padding: 18px; background: rgba(251,191,36,0.06); border-radius: var(--radius-md); border: 1px solid rgba(251,191,36,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-amber); margin-bottom: 10px;">📝 應用問題</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>設未知數→找兩個等量關係</li>
+          <li>列聯立方程式→求解</li>
+          <li>驗算→完整句子作答</li>
+        </ul>
+      </div>
+      <div style="padding: 18px; background: rgba(251,113,133,0.06); border-radius: var(--radius-md); border: 1px solid rgba(251,113,133,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-rose); margin-bottom: 10px;">⚠️ 常見錯誤</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>代入時忘記分配律（括號）</li>
+          <li>加減時符號判斷錯誤</li>
+          <li>求出一個未知數後忘記求另一個</li>
+        </ul>
+      </div>
+      <div style="padding: 18px; background: rgba(45,212,191,0.06); border-radius: var(--radius-md); border: 1px solid rgba(45,212,191,0.15);">
+        <div style="font-size: 17px; font-weight: 700; color: var(--neon-teal); margin-bottom: 10px;">💡 解題技巧</div>
+        <ul style="font-size: 15px; color: var(--text-secondary); padding-left: 18px;">
+          <li>優先選係數 ±1 的項整理</li>
+          <li>用 LCM 決定乘的倍數</li>
+          <li>驗算是最好的自我檢查</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>📐 數學1下 CH1-2｜二元一次聯立方程式互動學習單</p>
+  <p style="margin-top: 6px;">依循 NTNU Curator Skill 規範製作｜Midnight Dark Theme｜KaTeX 公式渲染｜Google Fonts Noto Sans TC</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+// 例題展開/收合
+function toggleExample(header) {
+  const box = header.closest('.example-box');
+  const answer = box.querySelector('.example-answer');
+  const btn = header.querySelector('.toggle-btn');
+  const isOpen = answer.classList.contains('open');
+  answer.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+
+// 填空題判斷
+function checkBlanks(ids, feedbackId) {
+  let correct = 0;
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const val = el.value.trim();
+    const ans = el.dataset.answer;
+    const normalize = s => s.replace(/\s+/g,'').replace(/[−–—]/g,'-').replace(/[（(]/g,'(').replace(/[）)]/g,')');
+    const isOk = normalize(val) === normalize(ans);
+    el.classList.remove('correct', 'wrong');
+    el.classList.add(isOk ? 'correct' : 'wrong');
+    if (isOk) correct++;
+  });
+  const fb = document.getElementById(feedbackId);
+  fb.className = 'feedback-msg';
+  if (correct === ids.length) {
+    fb.textContent = `🎉 全對！${ids.length}/${ids.length} 題正確！`;
+    fb.classList.add('show-correct');
+  } else {
+    fb.textContent = `😊 答對 ${correct}/${ids.length} 題，請再確認紅色欄位！`;
+    fb.classList.add('show-wrong');
+  }
+}
+
+// 自我評量
+let quizAnswers = {};
+let quizCorrect = {};
+
+function selectQuiz(qNum, optEl, isCorrect) {
+  if (quizAnswers[qNum] !== undefined) return;
+  const opts = document.querySelectorAll(`#q${qNum}-opts .quiz-opt`);
+  opts.forEach(o => { o.classList.remove('selected-correct', 'selected-wrong'); o.onclick = null; });
+  optEl.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+  quizAnswers[qNum] = true;
+  quizCorrect[qNum] = isCorrect;
+  setTimeout(() => {
+    const exp = document.getElementById(`qexp-${qNum}`);
+    if (exp) exp.classList.add('visible');
+  }, 300);
+  updateScore();
+}
+
+function updateScore() {
+  const answered = Object.keys(quizAnswers).length;
+  const correctCount = Object.values(quizCorrect).filter(Boolean).length;
+  document.getElementById('score-num').textContent = correctCount;
+  const pct = Math.round((answered / 6) * 100);
+  document.getElementById('score-pct').textContent = pct + '%';
+  document.getElementById('score-fill').style.width = pct + '%';
+}
+
+function finalScore() {
+  const correctCount = Object.values(quizCorrect).filter(Boolean).length;
+  const answered = Object.keys(quizAnswers).length;
+  const msg = document.getElementById('score-msg');
+  if (answered < 6) {
+    msg.textContent = `⚠️ 還有 ${6-answered} 題未作答！`;
+    msg.style.color = 'var(--neon-amber)';
+    return;
+  }
+  const table = [
+    [6, '🏆', '完美！所有題目全對，掌握得非常好！'],
+    [5, '🌟', '優秀！只有一題需要複習！'],
+    [4, '👍', '不錯！還有幾題需要加強練習！'],
+    [3, '📖', '繼續努力！建議重看各方法例題！'],
+    [0, '💪', '需要多多練習！從基礎定義開始！'],
+  ];
+  const [, emoji, feedback] = table.find(([n]) => correctCount >= n);
+  msg.innerHTML = `${emoji} 你答對了 ${correctCount}/6 題！${feedback}`;
+  msg.style.color = correctCount >= 5 ? 'var(--neon-emerald)' : 'var(--neon-amber)';
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  quizCorrect = {};
+  for (let i = 1; i <= 6; i++) {
+    const opts = document.querySelectorAll(`#q${i}-opts .quiz-opt`);
+    opts.forEach(o => {
+      o.classList.remove('selected-correct', 'selected-wrong');
+      const idx = [...opts].indexOf(o);
+      // 重新綁定事件需依原始正確選項
+    });
+    const exp = document.getElementById(`qexp-${i}`);
+    if (exp) exp.classList.remove('visible');
+  }
+  document.getElementById('score-num').textContent = '0';
+  document.getElementById('score-pct').textContent = '0%';
+  document.getElementById('score-fill').style.width = '0%';
+  document.getElementById('score-msg').textContent = '完成所有題目後，點選「計算成績」即可看見你的評估！';
+  document.getElementById('score-msg').style.color = '';
+  // 頁面重載以重置 onclick
+  location.reload();
+}
+
+// 進場動畫
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '0';
+        e.target.style.transform = 'translateY(20px)';
+        e.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        requestAnimationFrame(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.04 });
+
+  document.querySelectorAll('.card, .example-box, .practice-section, .quiz-card').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>
